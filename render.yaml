@@ -1,7 +1,7 @@
 services:
   - type: web
     name: webserver
-    runtime: image
+    runtime: docker
     image:
       url: ucfopen/materia:webserver-dev
     dockerfilePath: materia-webserver.Dockerfile
@@ -15,7 +15,7 @@ services:
 
   - type: web
     name: fakes3
-    runtime: image
+    runtime: docker 
     image:
       url: ucfopen/materia:fake-s3-dev
     dockerfilePath: materia-fake-s3.Dockerfile
@@ -29,7 +29,7 @@ services:
 
   - type: web
     name: app
-    runtime: image
+    runtime: docker
     image:
       url: ucfopen/materia:app-dev
     dockerfilePath: materia-app.Dockerfile
