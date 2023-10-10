@@ -1,0 +1,95 @@
+services:
+  - type: web
+    name: webserver
+    runtime: image
+    image:
+      url: ucfopen/materia:webserver-dev
+    dockerfilePath: materia-webserver.Dockerfile
+    dockerContext: ./
+
+  - type: pserv
+    name: memcached
+    runtime: image
+    image:
+      url: memcached:1.6.6-alpine
+
+  - type: web
+    name: fakes3
+    runtime: image
+    image:
+      url: ucfopen/materia:fake-s3-dev
+    dockerfilePath: materia-fake-s3.Dockerfile
+    dockerContext: ./
+
+  - type: web
+    name: mysql
+    runtime: image
+    image:
+      url: mysql:5.7.34
+
+  - type: web
+    name: app
+    runtime: image
+    image:
+      url: ucfopen/materia:app-dev
+    dockerfilePath: materia-app.Dockerfile
+    dockerContext: ./
+    envVars:
+      - key: ASSET_STORAGE_DRIVER
+        value: file
+      - key: ASSET_STORAGE_S3_BUCKET
+        value: fake_bucket
+      - key: ASSET_STORAGE_S3_ENDPOINT
+        value: http://fake3:10001
+      - key: ASSET_STORAGE_S3_KEY
+        value: KEY
+      - key: ASSET_STORAGE_S3_SECRET
+        value: SECRET
+      - key: AUTH_DRIVERS
+        value: Materiaauth
+      - key: AUTH_SALT
+        sync: false
+      - key: AUTH_SIMPLEAUTH_SALT
+        sync: false
+      - key: BOOL_LTI_LOG_FOR_DEBUGGING
+        value: true
+      - key: CACHE_DRIVER
+        value: memcached
+      - key: CIPHER_KEY
+        sync: false
+      - key: CRYPTO_HMAC
+        sync: false
+      - key: CRYPTO_IV
+        sync: false
+      - key: CRYPTO_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: FUEL_ENV
+        value: development
+      - key: FUEL_LOG_THRESHOLD
+        value: 100
+      - key: LOG_HANDLER
+        value: STDOUT
+      - key: LTI_KEY
+        value: materia-lti-key
+      - key: LTI_SECRET
+        value: materia-lti-secret
+      - key: MEMCACHED_HOST
+        value: memcached
+      - key: SESSION_DRIVER
+        value: memcached
+      - key: SYSTEM_EMAIL
+        value: noReply@materia.edu
+      - key: THEME_PACKAGE
+        value: materia-theme-ucf
+      - key: URLS_ENGINES
+        value: https://localhost:8008/widget/
+      - key: URLS_STATIC
+        value: https://localhost:8008/
+      - key: USER_INSTRUCTOR_PASSWORD
+        sync: false
+      - key: USER_STUDENT_PASSWORD
+        sync: false
+      - key: USER_SYSTEM_PASSWORD
+        sync: false
