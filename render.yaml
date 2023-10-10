@@ -6,13 +6,11 @@ services:
       url: ucfopen/materia:webserver-dev
     dockerfilePath: materia-webserver.Dockerfile
     dockerContext: ./
-
   - type: pserv
     name: memcached
     runtime: image
     image:
       url: memcached:1.6.6-alpine
-
   - type: web
     name: fakes3
     runtime: docker 
@@ -20,13 +18,6 @@ services:
       url: ucfopen/materia:fake-s3-dev
     dockerfilePath: materia-fake-s3.Dockerfile
     dockerContext: ./
-
-  - type: web
-    name: mysql
-    runtime: image
-    image:
-      url: mysql:5.7.34
-
   - type: web
     name: app
     runtime: docker
