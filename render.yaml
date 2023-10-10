@@ -13,7 +13,7 @@ services:
       url: memcached:1.6.6-alpine
   - type: web
     name: fakes3
-    runtime: docker 
+    runtime: image
     image:
       url: ucfopen/materia:fake-s3-dev
     dockerfilePath: materia-fake-s3.Dockerfile
