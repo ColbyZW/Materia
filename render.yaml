@@ -2,11 +2,11 @@ services:
   - type: web
     name: webserver
     runtime: docker
-    # image:
-    #   url: docker.io/ucfopen/materia:webserver-dev
+    image:
+      url: docker.io/ucfopen/materia:webserver-dev
     dockerfilePath: materia-webserver.Dockerfile
     dockerContext: ./
-  - type: pserv
+  - type: web
     name: memcached
     runtime: image
     image:
@@ -14,15 +14,15 @@ services:
   - type: web
     name: fakes3
     runtime: docker 
-    # image:
-    #   url: docker.io/ucfopen/materia:fake-s3-dev
+    image:
+      url: docker.io/ucfopen/materia:fake-s3-dev
     dockerfilePath: materia-fake-s3.Dockerfile
     dockerContext: ./
   - type: web
     name: app
     runtime: docker
-    # image:
-    #   url: docker.io/ucfopen/materia:app-dev
+    image:
+      url: docker.io/ucfopen/materia:app-dev
     dockerfilePath: materia-app.Dockerfile
     dockerContext: ./
     envVars:
